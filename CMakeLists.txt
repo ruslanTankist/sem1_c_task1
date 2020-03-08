@@ -1,3 +1,9 @@
+cmake_minimum_required(VERSION 3.10) # Проверка версии CMake.
+									# Если версия установленой программы
+									# старее указаной, произайдёт аварийный выход.
+project(hw1 C)
+
+
 if ("${TARGET_CPU}" STREQUAL "amd64")
     set (CMAKE_SIZEOF_VOID_P 8)
 
@@ -16,3 +22,10 @@ elseif ("${TARGET_CPU}" STREQUAL "x86")
 else ()
     message (FATAL_ERROR "Unsupported CPU: ${TARGET_CPU}")
 endif ()
+
+# ------------------------------------------------------------------------------
+# Main Executable
+# ------------------------------------------------------------------------------
+
+add_executable(main hw1.c)		# Создает исполняемый файл с именем main
+									# из исходника main.cpp
