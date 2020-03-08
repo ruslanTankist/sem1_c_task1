@@ -1,4 +1,4 @@
-// Условие ИЗ№1:
+// Юзеев Руслан, АПО-12, Условие ИЗ№1:
 
 /*Составить программу расчета гистограммы, отражающей, сколько раз каждое число встречается в заданном массиве целых чисел.
 Расчет оформить в виде функции, получающей на вход массив указателей на целые числа. На выход функция должна вернуть массив 
@@ -123,14 +123,12 @@ array_return number_frequency( array_return this_struct )
 	this_struct.o_arr_ptr[1] = (int *)malloc( this_struct.i_len * sizeof(int) );
 	if(!this_struct.o_arr_ptr[1]) { this_struct.errflag = ERR_ALLOC; return this_struct; }
 
-	int flag_is_new = 1;
 	int index_to_inc = 0;
-	int cur_num;
 	
 	for (int i = 0; i < this_struct.i_len; i++)
 	{
-		cur_num = this_struct.i_arr_ptr[i];
-		flag_is_new = 1;
+		int cur_num = this_struct.i_arr_ptr[i];
+		int flag_is_new = 1;
 		
 		for (int j = 0; j < (this_struct.o_len); j++)
 			if (this_struct.o_arr_ptr[0][j] == cur_num)
