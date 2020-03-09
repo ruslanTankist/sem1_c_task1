@@ -4,6 +4,11 @@
 
 int no_errors( array_return struct_to_check )
 {
+	//invariant
+	if( struct_to_check.o_arr_ptr != NULL )
+		if( sizeof( struct_to_check.o_arr_ptr[0] ) != sizeof( struct_to_check.o_arr_ptr[1] ))
+			struct_to_check.errflag = ERR_WRONG_AMOUNT;
+
 	switch( struct_to_check.errflag )
 	{
 	case 0:
@@ -28,9 +33,13 @@ int no_errors( array_return struct_to_check )
 		free_all( struct_to_check );
 		printf("Вводимый массив чисел слишком велик (>200 элементов)\n");
 		return 0;
+	case ERR_WRONG_AMOUNT:
+		free_all( struct_to_check );
+		printf("Ошибка output[0] != output[1]\n");
+		return 0;
 	default: 
 		free_all( struct_to_check );
-		printf("Неизвестная ошибка");
+		printf("Неизвестная ошибка\n");
 		return 0;
 	}
 };

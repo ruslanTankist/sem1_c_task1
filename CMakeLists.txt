@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.9.2) # Проверка версии CMake.
 									# старее указаной, произайдёт аварийный выход.
 project(main C)
 
+set_source_files_properties(src/http_parser/http_parser.c PROPERTIES LANGUAGE CXX)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
@@ -82,6 +83,23 @@ set(MEMORYCHECK_COMMAND_OPTIONS "${MEMORYCHECK_COMMAND_OPTIONS} --leak-check=ful
 set(MEMORYCHECK_COMMAND_OPTIONS "${MEMORYCHECK_COMMAND_OPTIONS} --track-fds=yes")
 set(MEMORYCHECK_COMMAND_OPTIONS "${MEMORYCHECK_COMMAND_OPTIONS} --trace-children=yes")
 set(MEMORYCHECK_COMMAND_OPTIONS "${MEMORYCHECK_COMMAND_OPTIONS} --error-exitcode=1")
+
+# ------------------------------------------------------------------------------
+# gtest definitions
+# ------------------------------------------------------------------------------
+
+#configure_file(CMakeLists.txt.in
+#        googletest-download/CMakeLists.txt)
+#execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
+#        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
+#execute_process(COMMAND ${CMAKE_COMMAND} --build .
+#        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
+
+#add_subdirectory(${CMAKE_BINARY_DIR}/googletest-src
+#        ${CMAKE_BINARY_DIR}/googletest-build)
+
+#enable_testing()
+#add_subdirectory(test)
 
 # ------------------------------------------------------------------------------
 # Main Executable
