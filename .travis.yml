@@ -2,36 +2,101 @@ dist:     trusty    # используем Ubuntu 14.04 Trusty Tahr (а не 12.
 sudo:     required  # используем Virtual Machine (а не Docker container)
 
 language: c       
-                   
-
-os:
-    - linux
-
-compiler:
-    # ... и с помощью GCC, и Clang
-    - gcc
-    - clang
-
+       
 env:
+  global:
+    secure: "bgNABu38bk4n5KSCXkCpsxy8RldbwCgTlsxIk5IB7/I9rJSyoDqMRZsbtP32vDyKtuDhf2gFoeXS4n34/Psik5gsxCc9R2cwYDBCmzU3viw7WSdTP74NPB5XsWSHAusvru8LVpQgyP+nVyO1FPFpvauqmcNZscibsl7xqHOz6cEN9TOg99cH4A4SGtaA4+IBhc7jcHxh9OnjJATiBQc7Hs4TKINGlBU5ozBlKymG+Qoferc9iYT58kVvNDp/X4WUiW1D8JFnK4BKgT70ZhaawhS7UC/qPj3sPDP4+OszI9GHJqA82qY3sqRMkele2luQaDVqJpoJQNr58QHE4GfNfJs6uNwpVAWOvjPauLVvfI7EiJcENf1pH0GZZe8rPoi0QnddJSRjJzKVgpGz4rbPfpaPGArxtTCFMqCcD+x2E8y/hoT3Ajqz/NViLO3FAfhXrfzbaT62J5CWZ8gDHYFYsGrx+monLOxFmy+KBxIGnS1jK3E2lQuPfO93CkLpMFOThwLXIv8qEohdmPXdDy5EqrKcZGQg5MxaTh8tiNNxXDm8pBtec0Nwz5FbYWSQ2CZ+fj8NCeZHHqh4IznB8DfxteEEIF2qUAqNOtqph3ytJcu7U3wnuOhNrZNH9XwiW24D53AP2kB7uFVBSj2eHQWcKLvQTjYSwR5Xh7NSrPvwApY="
+
+#
+# Build Dependencies
+#
+before_script:
+
+  #
+  # Build Folder
+  #
+  - mkdir build
+  - cd build
+
+  #
+  # Update / Install CMake
+  #
+  - |
+    if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
+      mkdir -p external/cmake
+      pushd external/cmake
+      wget https://cmake.org/files/v3.8/cmake-3.8.0-Linux-x86_64.sh
+      chmod +x cmake-*-Linux-x86_64.sh
+      ./cmake-*-Linux-x86_64.sh --exclude-subdir --skip-license
+      export PATH="${PWD}/bin:$PATH"
+      popd
+    else
+      if ! brew ls --version cmake &>/dev/null; then brew update; brew install cmake; fi
+    fi
+
+#
+# Build Matrix
+#
+matrix:
+  include:
+
+  #
+  # CppCheck
+  #
+  - os: linux
+    env:
+      - TEST="CppCheck"
+    addons:
+      apt:
+        sources:
+          - ubuntu-toolchain-r-test
+        packages:
+          - gcc-6
+          - g++-6
+    script:
+      - cmake -DENABLE_CPPCHECK=ON -DCMAKE_CXX_COMPILER="g++-6" ..
+      - make
+      - make check      
+
+  #
+  # Valgrind
+  #
+  - os: linux
+    env:
+      - TEST="Valgrind"
+    addons:
+      apt:
+        sources:
+          - ubuntu-toolchain-r-test
+        packages:
+          - gcc-6
+          - g++-6
+          - valgrind
+    script:
+      - cmake -DCMAKE_CXX_COMPILER="g++-6" ..
+      - make
+      - ctest -T memcheck
+
+  #
+  # OS configurations check
+  #
+  - os: linux
+    compiler:
+      - gcc
+      - clang
+    env:
     # список переменных окружения, влияющих на матрицу сборки:
-    - TARGET_CPU=amd64 BUILD_CONFIGURATION=Debug
-    - TARGET_CPU=amd64 BUILD_CONFIGURATION=Release
-    - TARGET_CPU=x86 BUILD_CONFIGURATION=Debug
-    - TARGET_CPU=x86 BUILD_CONFIGURATION=Release
-
-#install:
-    # скрипт настройки среды и установки зависимостей:
-   # - source ci/travis/install-$TRAVIS_OS_NAME.sh
-
-script:
+      - TARGET_CPU=amd64 BUILD_CONFIGURATION=Debug
+      - TARGET_CPU=amd64 BUILD_CONFIGURATION=Release
+      - TARGET_CPU=x86 BUILD_CONFIGURATION=Debug
+      - TARGET_CPU=x86 BUILD_CONFIGURATION=Release
+    script:
     # скрипт сборки и тестирования проекта:
-    - mkdir build
-    - cd build
-    - cmake -DCMAKE_CXX_COMPILER="g++-6" ..
-    - make
-    - ctest --output-on-failure
+      - cmake -DCMAKE_CXX_COMPILER="g++-6" ..
+      - make
+      - ctest --output-on-failure
 
-deploy:
+ deploy:
     # выкладываем tagged-коммиты на GitHub Releases:
     provider:     releases
     #file:         <package-file>
