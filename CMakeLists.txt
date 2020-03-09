@@ -44,3 +44,5 @@ set(MEMORYCHECK_COMMAND_OPTIONS "${MEMORYCHECK_COMMAND_OPTIONS} --error-exitcode
 
 add_executable(main hw1.c)		# Создает исполняемый файл с именем main
 									# из исходника main.cpp
+
+set_property(TARGET main PROPERTY C_STANDARD 99)
