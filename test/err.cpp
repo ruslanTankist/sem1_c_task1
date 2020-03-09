@@ -13,5 +13,4 @@ TEST(struct, ok) {
 
     if(!no_errors(test_struct))
         ASSERT_EQ(test_struct.o_arr_ptr, NULL);
-    else
 }

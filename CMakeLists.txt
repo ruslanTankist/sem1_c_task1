@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.9.2) # Проверка версии CMake.
+cmake_minimum_required(VERSION 3.1) # Проверка версии CMake.
 									# Если версия установленой программы
 									# старее указаной, произайдёт аварийный выход.
 project(main C)
