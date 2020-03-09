@@ -167,6 +167,7 @@ array_return output( array_return output_struct)
 	if( output_struct.o_len < 1 ) { output_struct.errflag = ERR_ARR_EMPTY; return output_struct; }
 	for( int i = 0; i < output_struct.o_len; i++ )
 		printf("%d - %d\n", output_struct.o_arr_ptr[0][i], output_struct.o_arr_ptr[1][i]);
+	return output_struct;
 };
 
 int no_errors( array_return struct_to_check )
