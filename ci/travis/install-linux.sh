@@ -1,8 +1,8 @@
 sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
 sudo apt-get update -qq
 
-sudo apt-get install -qq g++-6
-sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
+sudo apt-get install -qq g++-7
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 90
 
 CMAKE_VERSION=3.10.2
 CMAKE_VERSION_DIR=v3.10
@@ -27,5 +27,5 @@ if [ "$TARGET_CPU" == "x86" ]; then
     # ...
 
     # g++-multilib ставим в самом конце, после i386-пакетов!
-    sudo apt-get install -y g++-6-multilib
+    sudo apt-get install -y g++-7-multilib
 fi
