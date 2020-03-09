@@ -1,8 +1,8 @@
+language: c       
+       
 dist:     trusty    # используем Ubuntu 14.04 Trusty Tahr (а не 12.02 Precise Pangolin)
 sudo:     required  # используем Virtual Machine (а не Docker container)
 
-language: c       
-       
 env:
   global:
     secure: "bgNABu38bk4n5KSCXkCpsxy8RldbwCgTlsxIk5IB7/I9rJSyoDqMRZsbtP32vDyKtuDhf2gFoeXS4n34/Psik5gsxCc9R2cwYDBCmzU3viw7WSdTP74NPB5XsWSHAusvru8LVpQgyP+nVyO1FPFpvauqmcNZscibsl7xqHOz6cEN9TOg99cH4A4SGtaA4+IBhc7jcHxh9OnjJATiBQc7Hs4TKINGlBU5ozBlKymG+Qoferc9iYT58kVvNDp/X4WUiW1D8JFnK4BKgT70ZhaawhS7UC/qPj3sPDP4+OszI9GHJqA82qY3sqRMkele2luQaDVqJpoJQNr58QHE4GfNfJs6uNwpVAWOvjPauLVvfI7EiJcENf1pH0GZZe8rPoi0QnddJSRjJzKVgpGz4rbPfpaPGArxtTCFMqCcD+x2E8y/hoT3Ajqz/NViLO3FAfhXrfzbaT62J5CWZ8gDHYFYsGrx+monLOxFmy+KBxIGnS1jK3E2lQuPfO93CkLpMFOThwLXIv8qEohdmPXdDy5EqrKcZGQg5MxaTh8tiNNxXDm8pBtec0Nwz5FbYWSQ2CZ+fj8NCeZHHqh4IznB8DfxteEEIF2qUAqNOtqph3ytJcu7U3wnuOhNrZNH9XwiW24D53AP2kB7uFVBSj2eHQWcKLvQTjYSwR5Xh7NSrPvwApY="
