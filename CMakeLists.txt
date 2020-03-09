@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.9.2) # Проверка версии CMake.
 									# Если версия установленой программы
 									# старее указаной, произайдёт аварийный выход.
-project(hw1 C)
+project(main C)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -42,7 +42,13 @@ set(MEMORYCHECK_COMMAND_OPTIONS "${MEMORYCHECK_COMMAND_OPTIONS} --error-exitcode
 # Main Executable
 # ------------------------------------------------------------------------------
 
-add_executable(main hw1.c)		# Создает исполняемый файл с именем main
+include_directories("./include")
+
+file(GLOB sources 
+    "${PROJECT_SOURCE_DIR}/include/hw1/*.h"
+    "${PROJECT_SOURCE_DIR}/src/*.c")
+
+add_executable(main ${sources})		# Создает исполняемый файл с именем main
 									# из исходника main.cpp
 
 set_property(TARGET main PROPERTY C_STANDARD 99)
