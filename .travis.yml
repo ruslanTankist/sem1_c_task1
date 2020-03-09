@@ -21,8 +21,8 @@ env:
     - TARGET_CPU=x86 BUILD_CONFIGURATION=Debug
     - TARGET_CPU=x86 BUILD_CONFIGURATION=Release
 
-matrix:
-    exclude:
+#matrix:
+    #exclude:
         # вручную исключим ненужные элементы из матрицы сборки:
   #      - os:       osx
   #        compiler: gcc
