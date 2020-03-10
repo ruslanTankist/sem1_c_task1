@@ -13,11 +13,11 @@ before_script:
   #
   - mkdir build
   - cd build
-
   #
   # Build gtest via cmake
   #
   - |
+    if [ ${TASK} == "cmake_test" ]; then
     set -e
     wget -nc https://github.com/google/googletest/archive/release-1.7.0.zip
     unzip -n release-1.7.0.zip
@@ -33,6 +33,9 @@ before_script:
     make
     cd ..
     ./testxgboost
+    rm -rf build
+    fi
+
 
   #
   # Update / Install CMake
@@ -108,7 +111,7 @@ matrix:
       - TARGET_CPU=x86 BUILD_CONFIGURATION=Release
     script:
     # скрипт сборки и тестирования проекта:
-      - cmake -DCMAKE_CXX_COMPILER="g++-6" ..
+      - cmake ..
       - make
       - ctest --output-on-failure
 
