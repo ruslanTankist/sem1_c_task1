@@ -20,12 +20,11 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <hw1/struct.h>
-#include <hw1/io.h>
-#include <hw1/err.h>
-#include <hw1/numfreq.h>
 
-int main(int argc, char *argv[])
+#include "struct.h"
+#include "functionality.h"
+
+int main(int argc, char ** argv)
 {
 	//arr_ret is a common struct for returning array and error value
 	array_return arr_ret = { NULL, 0, NULL, 0, 0 };

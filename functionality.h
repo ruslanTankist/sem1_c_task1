@@ -1,5 +1,5 @@
-#ifndef _ERR_H_
-#define _ERR_H_
+#ifndef _FUNCTIONALITY_H_
+#define _FUNCTIONALITY_H_
 
 #define ERR_ALLOC (1)
 #define ERR_NAN (2)
@@ -11,5 +11,13 @@
 #define MAX_INT (999999)
 
 int no_errors( array_return );
+
+array_return input( array_return );
+
+array_return output( array_return );
+
+void free_all( array_return );
+
+array_return number_frequency( array_return );
 
 #endif

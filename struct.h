@@ -13,6 +13,4 @@ typedef struct {
 	int errflag;
 } array_return;
 
-void free_all( array_return );
-
 #endif
