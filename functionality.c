@@ -113,6 +113,8 @@ int no_errors( array_return struct_to_check )
 
 array_return number_frequency( array_return this_struct )
 {
+    if( !this_struct.i_len || !this_struct.i_arr_ptr ) { this_struct.errflag = ERR_WRONG_AMOUNT; return this_struct; }
+
 	this_struct.o_arr_ptr = (int **)malloc( 2 * sizeof(int *) );
 	if( !this_struct.o_arr_ptr ) { this_struct.errflag = ERR_ALLOC; return this_struct; }
 	
