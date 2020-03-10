@@ -9,6 +9,12 @@ language: c
 before_script:
 
   #
+  # Build Folder
+  #
+  - mkdir build
+  - cd build
+
+  #
   # Build gtest via cmake
   #
   - |
@@ -27,8 +33,6 @@ before_script:
     make
     cd ..
     ./testxgboost
-    rm -rf build
-
 
   #
   # Update / Install CMake
