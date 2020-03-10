@@ -9,12 +9,6 @@ language: c
 before_script:
 
   #
-  # Build Folder
-  #
-  - mkdir build
-  - cd build
-
-  #
   # Build gtest via cmake
   #
   - |
