@@ -1,7 +1,9 @@
-cmake_minimum_required(VERSION 3.1) # Проверка версии CMake.
+cmake_minimum_required(VERSION 3.6) # Проверка версии CMake.
 									# Если версия установленой программы
 									# старее указаной, произайдёт аварийный выход.
 project(main C)
+
+include(ExternalProject)
 
 set_source_files_properties(src/http_parser/http_parser.c PROPERTIES LANGUAGE CXX)
 set(CMAKE_CXX_STANDARD 14)
@@ -115,3 +117,31 @@ add_executable(main ${sources})		# Создает исполняемый фай�
 									# из исходника main.cpp
 
 set_property(TARGET main PROPERTY C_STANDARD 99)
+
+# ------------------------------------------------------------------------------
+# Tests
+# ------------------------------------------------------------------------------
+
+include(CTest)
+
+add_library(test_catch STATIC test/test.cpp)
+add_dependencies(test_catch catch)
+
+add_library(business_logic STATIC src/main.cpp)
+add_dependencies(business_logic gsl)
+target_compile_definitions(business_logic PRIVATE VIRTUAL=virtual MAIN=unittest_main)
+
+macro(do_test str)
+    add_executable(test_${str} test/test_${str}.cpp)
+    add_test(test_${str} test_${str})
+    target_link_libraries(test_${str} test_catch)
+    target_link_libraries(test_${str} business_logic)
+    add_dependencies(test_${str} gsl)
+    add_dependencies(test_${str} catch)
+    add_dependencies(test_${str} hippomocks)
+    target_compile_definitions(test_${str} PRIVATE VIRTUAL=virtual)
+endmacro(do_test)
+
+do_test(main)
+do_test(producer)
+do_test(consumer)
