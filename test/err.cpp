@@ -12,5 +12,5 @@ TEST(struct, ok) {
     test_struct.o_arr_ptr[1] = (int *)malloc(11 * sizeof(int));
 
     if(!no_errors(test_struct))
-        ASSERT_EQ(test_struct.o_arr_ptr, NULL);
+        ASSERT_TRUE(test_struct.o_arr_ptr == NULL);
 }

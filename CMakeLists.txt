@@ -1,9 +1,10 @@
 cmake_minimum_required(VERSION 3.6) # Проверка версии CMake.
 									# Если версия установленой программы
 									# старее указаной, произайдёт аварийный выход.
-project(main C CXX)
+project(main)
 
 include(ExternalProject)
+include_directories(BEFORE ${GTEST_INCLUDE_DIRS})
 find_package(Git REQUIRED)
 
 set_source_files_properties(src/http_parser/http_parser.c PROPERTIES LANGUAGE CXX)
