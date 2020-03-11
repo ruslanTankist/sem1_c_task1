@@ -26,19 +26,19 @@
 
 int main(int argc, char ** argv)
 {
-	//arr_ret is a common struct for returning array and error value
-	array_return arr_ret = { NULL, 0, NULL, 0, 0 };
-	
-	arr_ret = input( arr_ret );
-	if( !no_errors( arr_ret )) { return 0; }
-	
-	arr_ret = number_frequency(arr_ret);
-	if( !no_errors( arr_ret )) { return 0; }
-	
-	arr_ret = output( arr_ret );
-	if( !no_errors( arr_ret )) { return 0; }
-	
-	free_all( arr_ret );
-	
-	return 0;
+    //arr_ret is a common struct for returning array and error value
+    array_return arr_ret = { NULL, 0, NULL, 0, 0 };
+
+    arr_ret = input( arr_ret );
+    if( print_error_msg( arr_ret.errflag )) { free_all( arr_ret); return 0; }
+
+    arr_ret = number_frequency(arr_ret);
+    if( print_error_msg( arr_ret.errflag )) { free_all( arr_ret); return 0; }
+
+    arr_ret = output( arr_ret );
+    if( print_error_msg( arr_ret.errflag )) { free_all( arr_ret); return 0; }
+
+    free_all( arr_ret );
+
+    return 0;
 }

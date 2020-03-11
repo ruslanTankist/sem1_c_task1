@@ -10,10 +10,12 @@
 
 #define MAX_INT (999999)
 
-int no_errors( array_return );
+int print_error_msg( const int );
 
+//input of numbers' array
 array_return input( array_return );
 
+//output of histogram table: *number* - *amount*
 array_return output( array_return );
 
 void free_all( array_return );
